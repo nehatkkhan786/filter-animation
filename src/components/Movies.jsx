@@ -1,5 +1,6 @@
 import { useContext } from "react"
 import { AppContext } from "../App"
+import { animate, motion } from "framer-motion"
 
 
 
@@ -15,10 +16,16 @@ const {filterMovies} = useContext(AppContext)
    <>
     {filterMovies?.map((movie)=>{
         return (
-            <div key={movie?.title} className='image-card'>
+            <motion.div key={movie?.id} className='image-card'
+            layout
+            initial={{opacity:0}}
+            animate={{opacity:1}} 
+            exit={{opacity:0}}
+            transition={{duration:0.5}}
+            >
                 <img  src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} alt={movie.title}/>
                 <h2 className='movie-title'>{movie.title}</h2>
-            </div>
+            </motion.div>
         )
     })}
    </>
